@@ -13,7 +13,7 @@ This system manages inventory items and tracks stock movements with the followin
 - Movement history tracking
 - RESTful JSON API
 - Simple, functional web UI
-- Comprehensive test coverage
+
 
 ## Architecture
 
@@ -114,43 +114,10 @@ This will:
    
    Open http://localhost:5173 in your browser
 
-### Optional: Database Management UI
-
-Start pgAdmin for database management:
-```bash
-docker-compose --profile tools up -d pgadmin
-```
-Access at http://localhost:5050
-- Email: `admin@inventory.local`
-- Password: `admin`
-
 ### Stopping Services
 
 ```bash
 docker-compose down
-```
-
-## Running Tests
-
-### Backend Tests
-```bash
-cd backend
-mix test                    # Run all tests
-mix test --cover           # With coverage report
-```
-
-**Test Coverage:**
-- Stock calculation with various movement types
-- Negative stock rejection (unit and integration)
-- Item CRUD operations
-- Movement recording with validation
-- API endpoint tests
-- Error handling
-
-### Frontend
-```bash
-cd frontend
-npm run lint               # ESLint checks
 ```
 
 ## API Documentation
@@ -209,8 +176,7 @@ curl -X POST http://localhost:4000/api/movements \
 1. **Type Safety**: Full TypeScript coverage
 2. **React Query**: Automatic caching and refetching
 3. **Error Boundaries**: Graceful error handling
-4. **Responsive Design**: Mobile-friendly layout
-5. **No UI Framework**: Clean, simple CSS (as per requirements)
+4. **No UI Framework**: Clean, simple CSS (as per requirements)
 
 ## Stock Calculation Logic
 
@@ -242,7 +208,7 @@ end
 3. **Immutable Movements**: Movements cannot be edited or deleted (audit trail)
 4. **UTC Timestamps**: All timestamps stored in UTC
 5. **Decimal Precision**: 10 digits, 2 decimal places
-6. **No Authentication**: Simple demo system (add auth for production)
+
 
 ## Production Deployment
 
