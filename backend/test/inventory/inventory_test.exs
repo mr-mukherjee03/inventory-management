@@ -13,7 +13,7 @@ defmodule Inventory.InventoryTest do
     end
 
     test "list_items_with_stock/0 returns items with stock" do
-      {:ok, item} = Inventory.create_item(%{name: "Item", sku: "SKU-001", unit: "pcs"})
+      {:ok, _item} = Inventory.create_item(%{name: "Item", sku: "SKU-001", unit: "pcs"})
       
       items = Inventory.list_items_with_stock()
       
@@ -49,7 +49,7 @@ defmodule Inventory.InventoryTest do
       
       {:ok, item_with_stock} = Inventory.get_item_with_stock(item.id)
       
-      assert item_with_stock.current_stock == Decimal.new("70")
+      assert Decimal.equal?(item_with_stock.current_stock, Decimal.new("70"))
     end
   end
 end
