@@ -153,6 +153,4 @@ npm install
 - [ ] Search and filter functionality
 - [ ] Export data to CSV
 - [ ] Charts and analytics
-- [ ] Dark mode
-- [ ] Keyboard shortcuts
-- [ ] Accessibility improvements (ARIA labels)
+

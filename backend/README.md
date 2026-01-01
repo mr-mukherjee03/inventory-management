@@ -1,8 +1,8 @@
 # Inventory Management System - Backend
 
-Production-level Elixir/Phoenix JSON API for inventory management with proper OOP/OOD principles, comprehensive logging, exception handling, and testing.
+Elixir/Phoenix JSON API for inventory management with  comprehensive logging, exception handling, and testing.
 
-## 🏗️ Architecture
+## Architecture
 
 This backend follows clean architecture principles with clear separation of concerns:
 
@@ -29,7 +29,7 @@ lib/
     └── telemetry.ex           # Monitoring and metrics
 ```
 
-## 📊 Data Model
+## Data Model
 
 ### Items Table
 ```sql
@@ -60,7 +60,7 @@ CREATE TABLE inventory_movements (
 - Indexes on foreign keys and frequently queried fields
 - ON DELETE RESTRICT prevents orphaned movements
 
-## 🧮 Stock Calculation Logic
+## Stock Calculation Logic
 
 Stock is calculated dynamically using the formula:
 
@@ -81,7 +81,7 @@ Implementation in `StockCalculator` module:
 - Use database transaction to ensure consistency
 - Rollback transaction if validation fails
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - **Docker & Docker Compose** (recommended)
@@ -167,7 +167,7 @@ Access at http://localhost:5050
 docker-compose down
 ```
 
-## 🧪 Running Tests
+## Running Tests
 
 ### Run all tests:
 ```bash
@@ -184,15 +184,7 @@ mix test --cover
 mix test test/inventory/stock_calculator_test.exs
 ```
 
-### Test Coverage
-The test suite includes:
-- ✅ Unit tests for `StockCalculator` (stock calculation logic)
-- ✅ Unit tests for negative stock rejection
-- ✅ Integration tests for `Inventory` context
-- ✅ Controller tests for API endpoints
-- ✅ Edge cases and error scenarios
-
-## 📡 API Endpoints
+## API Endpoints
 
 ### Items
 
@@ -238,7 +230,7 @@ All errors follow consistent format:
 }
 ```
 
-## 🔍 Logging
+## Logging
 
 The application uses structured logging throughout:
 
@@ -252,7 +244,7 @@ Log levels:
 - Test: `:warning`
 - Production: `:info`
 
-## 🏭 Production Considerations
+## Production Considerations
 
 ### Environment Variables (Production)
 ```bash
@@ -269,7 +261,7 @@ MIX_ENV=prod mix ecto.migrate
 MIX_ENV=prod mix phx.server
 ```
 
-## 🎯 Design Principles Applied
+## Design Principles Applied
 
 1. **Context Pattern**: `Inventory` module serves as the main API boundary
 2. **Separation of Concerns**: Clear layers (domain, business logic, web)
@@ -280,7 +272,7 @@ MIX_ENV=prod mix phx.server
 7. **Logging**: Comprehensive logging for observability
 8. **Testing**: High test coverage with unit and integration tests
 
-## 📝 Assumptions
+## Assumptions
 
 1. SKU must be unique across all items
 2. Quantity is always positive (negative adjustments use ADJUSTMENT type)
@@ -290,7 +282,7 @@ MIX_ENV=prod mix phx.server
 6. Timestamps use UTC
 7. Decimal precision: 10 digits, 2 decimal places
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 **Database connection error:**
 ```bash
@@ -305,7 +297,7 @@ mix ecto.reset
 config :inventory, InventoryWeb.Endpoint, http: [port: 4001]
 ```
 
-## 📚 Further Improvements
+## Further Improvements
 
 For production deployment, consider:
 - [ ] Database connection pooling tuning
