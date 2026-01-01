@@ -1,0 +1,42 @@
+
+/_build/
+/cover/
+/deps/
+/doc/
+/.fetch
+
+erl_crash.dump
+*.ez
+inventory-*.tar
+
+/tmp/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.elixir_ls/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Phoenix
+/priv/static/
+
+# Logs
+*.log
+/logs/
+
+# Release artifacts
+/_build/
+/rel/
+
