@@ -39,10 +39,9 @@ api.interceptors.response.use(
 
         const errorMessage = error.response?.data?.error?.message || 'An unexpected error occurred';
 
-        const enhancedError = new Error(errorMessage);
-        (enhancedError as any).details = error.response?.data?.error?.details;
-        (enhancedError as any).code = error.response?.data?.error?.code;
-
+        const enhancedError = new Error(errorMessage) as Error & { details?: unknown; code?: string };
+        enhancedError.details = error.response?.data?.error?.details;
+        enhancedError.code = error.response?.data?.error?.code;
         return Promise.reject(enhancedError);
     }
 );

@@ -22,11 +22,11 @@ export function ItemForm() {
 
             alert('Item created successfully.');
         },
-        onError: (err: any) => {
+        onError: (err: Error & { details?: Record<string, string[]> }) => {
             console.error('Error creating item:', err);
             if (err.details) {
                 const errorMessages = Object.entries(err.details)
-                    .map(([field, messages]) => `${field}: ${(messages as string[]).join(', ')}`)
+                    .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
                     .join('\n');
                 setError(errorMessages);
             } else {

@@ -39,15 +39,13 @@ export function MovementForm() {
 
             alert('Movement recorded successfully!');
         },
-        onError: (err: any) => {
+        onError: (err: Error & { code?: string; details?: Record<string, string[]> }) => {
             console.error('Error recording movement:', err);
-
-            // Handle specific error codes
             if (err.code === 'insufficient_stock') {
-                setError('❌ ' + err.message);
+                setError('Insufficient stock for this operation');
             } else if (err.details) {
                 const errorMessages = Object.entries(err.details)
-                    .map(([field, messages]) => `${field}: ${(messages as string[]).join(', ')}`)
+                    .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
                     .join('\n');
                 setError(errorMessages);
             } else {

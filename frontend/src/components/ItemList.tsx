@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { itemsApi } from '../api/api';
-import type { Item, Unit } from '../api/types';
 
 export function ItemList() {
-    const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-    const queryClient = useQueryClient();
+    const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
 
     const { data: items, isLoading, error } = useQuery({
         queryKey: ['items'],
@@ -40,7 +38,7 @@ export function ItemList() {
                     </thead>
                     <tbody>
                         {items?.map((item) => (
-                            <tr key={item.id} className={selectedItemId === item.id ? 'selected' : ''}>
+                            <tr key={item.id} className={expandedItemId === item.id ? 'selected' : ''}>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
                                 <td><code>{item.sku}</code></td>
@@ -50,10 +48,10 @@ export function ItemList() {
                                 </td>
                                 <td>
                                     <button
-                                        onClick={() => setSelectedItemId(item.id === selectedItemId ? null : item.id)}
+                                        onClick={() => setExpandedItemId(item.id === expandedItemId ? null : item.id)}
                                         className="btn-secondary"
                                     >
-                                        {selectedItemId === item.id ? 'Hide' : 'View'} History
+                                        {expandedItemId === item.id ? 'Hide' : 'View'} History
                                     </button>
                                 </td>
                             </tr>
@@ -62,8 +60,8 @@ export function ItemList() {
                 </table>
             )}
 
-            {selectedItemId && (
-                <ItemDetail itemId={selectedItemId} onClose={() => setSelectedItemId(null)} />
+            {expandedItemId && (
+                <ItemDetail itemId={expandedItemId} onClose={() => setExpandedItemId(null)} />
             )}
         </div>
     );
@@ -72,7 +70,7 @@ export function ItemList() {
 function ItemDetail({ itemId, onClose }: { itemId: number; onClose: () => void }) {
     const { data: movements, isLoading, error } = useQuery({
         queryKey: ['movements', itemId],
-        queryFn: () => itemsApi.getById(itemId).then(async (item) => {
+        queryFn: () => itemsApi.getById(itemId).then(async () => {
             const { movementsApi } = await import('../api/api');
             return movementsApi.getByItemId(itemId);
         }),
