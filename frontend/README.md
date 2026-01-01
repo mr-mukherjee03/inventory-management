@@ -53,7 +53,6 @@ src/
 - Real-time stock updates
 - Error handling for insufficient stock
 - Loading states and error messages
-- Responsive design
 
 ## Technology Stack
 
@@ -126,14 +125,8 @@ npm run preview
 2. **TypeScript**: Full type safety matching backend API
 3. **No UI Framework**: Clean, simple CSS as per requirements
 4. **Error Handling**: Multi-layer (client validation, API errors, React errors)
-5. **Responsive Design**: Works on desktop and mobile
-6. **Optimistic Updates**: Immediate UI feedback
+5. **Optimistic Updates**: Immediate UI feedback
 
-## Responsive Breakpoints
-
-- Desktop: > 968px (side-by-side layout)
-- Tablet: 640px - 968px (stacked layout)
-- Mobile: < 640px (compact layout)
 
 ## Troubleshooting
 
@@ -149,8 +142,8 @@ npm install
 
 ## Future Enhancements
 
-- [ ] Pagination for large item lists
+- [ ] Pagination
 - [ ] Search and filter functionality
-- [ ] Export data to CSV
-- [ ] Charts and analytics
+- [ ] Exportation of data
+- [ ] Dashboard
 
