@@ -34,9 +34,19 @@ defmodule InventoryWeb.Endpoint do
 
   # CORS configuration
   plug CORSPlug,
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: &InventoryWeb.Endpoint.cors_origin/0,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     headers: ["Authorization", "Content-Type", "Accept", "Origin"]
+
+  def cors_origin do
+    if Mix.env() == :prod do
+      # Allow all origins in production
+      ["*"]
+    else
+      # Restrict to localhost in development
+      ["http://localhost:5173", "http://localhost:3000"]
+    end
+  end
 
   plug InventoryWeb.Router
 end

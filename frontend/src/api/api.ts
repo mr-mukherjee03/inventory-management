@@ -9,7 +9,10 @@ import type {
 } from './types';
 
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+// Get API URL from environment variable or use /api for local dev
+const API_BASE_URL = import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/api`
+    : '/api';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
