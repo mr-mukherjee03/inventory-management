@@ -2,7 +2,6 @@ databases:
   - name: inventory-db
     plan: free
     databaseName: inventory_prod
-    user: postgres
 
 services:
   # Phoenix Backend
