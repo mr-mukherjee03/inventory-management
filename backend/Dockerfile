@@ -57,5 +57,5 @@ EXPOSE 4000
 # Set environment
 ENV HOME=/app
 
-# Start the application
-CMD ["bin/inventory", "start"]
+# Start the application with migrations
+CMD ["sh", "-c", "bin/inventory eval 'Inventory.Release.migrate()' && bin/inventory start"]
