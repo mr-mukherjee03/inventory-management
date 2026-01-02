@@ -4,19 +4,8 @@ services:
     name: inventory-db
     plan: free
     region: oregon
-    env: docker
-    dockerfilePath: ./Dockerfile.postgres
-    disk:
-      name: inventory-db-data
-      mountPath: /var/lib/postgresql/data
-      sizeGB: 1
-    envVars:
-      - key: POSTGRES_USER
-        value: postgres
-      - key: POSTGRES_PASSWORD
-        generateValue: true
-      - key: POSTGRES_DB
-        value: inventory_prod
+    databaseName: inventory_prod
+    databaseUser: postgres
 
   # Phoenix Backend
   - type: web
@@ -47,7 +36,6 @@ services:
   - type: web
     name: inventory-frontend
     plan: free
-    region: oregon
     env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
