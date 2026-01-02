@@ -39,12 +39,13 @@ defmodule InventoryWeb.Endpoint do
     headers: ["Authorization", "Content-Type", "Accept", "Origin"]
 
   def cors_origin do
-    if Mix.env() == :prod do
-      # Allow all origins in production
-      ["*"]
-    else
-      # Restrict to localhost in development
-      ["http://localhost:5173", "http://localhost:3000"]
+    case System.get_env("MIX_ENV") do
+      "prod" ->
+        # Allow all origins in production
+        ["*"]
+      _ ->
+        # Restrict to localhost in development
+        ["http://localhost:5173", "http://localhost:3000"]
     end
   end
 
