@@ -3,18 +3,14 @@ services:
   - type: pserv
     name: inventory-db
     plan: free
-    region: oregon
-    databaseName: inventory_prod
-    databaseUser: postgres
 
   # Phoenix Backend
   - type: web
     name: inventory-backend
     plan: free
-    region: oregon
-    env: elixir
-    buildCommand: chmod +x ./backend/build.sh && ./backend/build.sh
-    startCommand: cd backend && MIX_ENV=prod mix phx.server
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     envVars:
       - key: MIX_ENV
         value: prod
@@ -25,12 +21,14 @@ services:
           name: inventory-db
           property: connectionString
       - key: PHX_HOST
-        value: inventory-backend.onrender.com
+        fromService:
+          type: web
+          name: inventory-backend
+          property: host
       - key: PORT
         value: 4000
       - key: POOL_SIZE
         value: 10
-    healthCheckPath: /api/items
 
   # React Frontend
   - type: web
@@ -41,7 +39,10 @@ services:
     staticPublishPath: ./frontend/dist
     envVars:
       - key: VITE_API_URL
-        value: https://inventory-backend.onrender.com
+        fromService:
+          type: web
+          name: inventory-backend
+          envVarKey: RENDER_EXTERNAL_URL
     routes:
       - type: rewrite
         source: /*
