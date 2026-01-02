@@ -10,6 +10,7 @@ services:
     plan: free
     env: docker
     dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     envVars:
       - key: MIX_ENV
         value: prod
