@@ -12,6 +12,8 @@ services:
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     envVars:
+      - key: PHX_SERVER
+        value: true
       - key: MIX_ENV
         value: prod
       - key: SECRET_KEY_BASE
